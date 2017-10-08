@@ -1,0 +1,20 @@
+{
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["compat", "prettier"],
+  "rules": {
+    "compat/compat": 2
+  },
+  "parserOptions": {
+    "ecmaVersion": 2016,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jest": true
+  }
+}
