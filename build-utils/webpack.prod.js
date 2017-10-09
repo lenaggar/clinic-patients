@@ -1,18 +1,32 @@
 /* eslint-disable */
-const webpack = require("webpack");
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const UglifyJsWebpackPlugin = require("uglifyjs-webpack-plugin");
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
 
 const config = {
-  entry: {
-    bundle: commonPaths.entryPath,
-    vendor: VENDOR_LIBS,
-  },
-  output: {
-    filename: "[name].js",
-    path: commonPaths.outputPath,
+  devtool: "source-map",
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextWebpackPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader"],
+        }),
+      },
+    ],
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor",
+    new ExtractTextWebpackPlugin("styles.css"),
+    new UglifyJsWebpackPlugin({
+      sourceMap: true,
+    }),
+    new CompressionWebpackPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.(js|html|css)$/,
+      threshold: 10240,
+      minRatio: 0.8,
     }),
   ],
 };

@@ -1,6 +1,6 @@
 /* eslint-disable */
 const config = {
-  devtool: "source-map",
+  devtool: "eval-source-map",
 };
 
 module.exports = config;
