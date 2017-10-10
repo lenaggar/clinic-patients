@@ -1,4 +1,3 @@
-/* eslint-disable */
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const UglifyJsWebpackPlugin = require("uglifyjs-webpack-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");

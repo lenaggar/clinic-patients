@@ -1,4 +1,3 @@
-/* eslint-disable */
 const commonPaths = require("./common-paths");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -16,14 +15,16 @@ const VENDOR_LIBS = [
 const config = {
   context: commonPaths.rootPath,
   entry: {
-    bundle: commonPaths.entryPath,
+    bundle: commonPaths.entryFilePath,
     vendor: VENDOR_LIBS
   },
   output: {
-    filename: "[name].[chunkhash].js",
+    filename: "[name].[hash].js",
     path: commonPaths.outputPath
   },
-  resolve: [".js", ".jsx", ".json"],
+  resolve: {
+    extensions: [".js", ".jsx", ".json"]
+  },
   stats: {
     colors: true,
     reasons: true,
@@ -39,15 +40,23 @@ const config = {
       {
         use: ["style-loader", "css-loader"],
         test: /\.css$/
+      },
+      {
+        test: /\.html$/,
+        loader: "html-loader"
       }
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.ProgressPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       names: ["vendor", "manifest"]
     }),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+      inject: "body"
+    })
   ]
 };
 

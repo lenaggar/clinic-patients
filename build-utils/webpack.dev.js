@@ -1,4 +1,3 @@
-/* eslint-disable */
 const config = {
   devtool: "cheap-eval-source-map"
 };

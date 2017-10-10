@@ -1,23 +1,18 @@
 import React from "react";
-import { Route, IndexRoute } from "react-router";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {
-  App,
-  Home,
-  About,
-  Patients,
-  PatientsList,
-  PatientDetails,
-  CreatePatient
+  App
+  // Home
+  // About,
+  // Patients,
+  // PatientsList,
+  // PatientDetails,
+  // CreatePatient
 } from "./components";
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={Home} />
-    <Route path="/about" component={About} />
-    <Route path="/patients" component={Patients}>
-      <IndexRoute component={PatientsList} />
-      <Route path="/patients/:id" component={PatientDetails} />
-      <Route path="/patients/create" component={CreatePatient} />
-    </Route>
-  </Route>
+  <h1>sdfasdfdaf</h1>
+  // <BrowserRouter>
+  //   <Route path="/" component={App} />
+  // </BrowserRouter>
 );

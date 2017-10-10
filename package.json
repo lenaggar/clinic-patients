@@ -8,13 +8,13 @@
   "license": "MIT",
   "scripts": {
     "test": "eslint src && jest --coverage",
-    // "precommit": "yarn test",
-    // "prepush": "yarn test",
+    "precommit": "yarn ",
+    "prepush": "yarn ",
     "build": "yarn clean && webpack",
-    "build:watch": "yarn build --watch",
-    "build:watch:prod": "yarn build:watch --env.env=prod",
-    "build:watch:dev": "yarn build:watch --env.env=dev",
-    "clean": "rimraf dist"
+    "build:watch:prod": "yarn clean && webpack --watch --env.env=prod",
+    "build:watch:dev": "yarn clean && webpack --watch --env.env=dev",
+    "clean": "rimraf dist",
+    "serve": "webpack-dev-server --hot --env.env=dev"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -23,6 +23,7 @@
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-form": "^7.1.0",
     "redux-thunk": "^2.2.0",
@@ -49,8 +50,8 @@
     "eslint-plugin-react": "7.4.0",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
+    "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
-    "husky": "^0.14.3",
     "jest": "^21.2.1",
     "prettier": "^1.7.4",
     "react-hot-loader": "^3.0.0-beta.7",
