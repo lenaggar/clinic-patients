@@ -5,44 +5,66 @@ import { patientsFetchData } from "./../../actions/patientActions";
 import PatientRow from "./PatientRow";
 
 class PatientsList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleRefresh = this.handleRefresh.bind(this);
+  }
+
   componentDidMount() {
-    if (!this.props.patients.length) {
+    if (!this.props.initialFetch && !this.props.isLoading) {
       this.props.fetchData();
-    }
+    };
   }
 
   shouldComponentUpdate(nextProps) {
     if (this.props.isLoading && !nextProps.isLoading) {
       return false;
-    }
-
+    };
     return true;
+  }
+ 
+  handleRefresh() {
+    if (!this.props.isLoading) {
+      this.props.fetchData();
+    }
   }
 
   render() {
-    console.log("props:   ", this.props); // eslint-disable-line no-console
+    const {
+      hasErrored,
+      isLoading,
+      patients
+    } = this.props;
 
-    if (this.props.hasErrored) {
+    if (hasErrored) {
       return (
         <div className="loading-error">
-          <p>Sorry! There was an error loading the data</p>
+          <p>Sorry! There was an error fetching the data</p>
         </div>
       );
     }
 
-    if (this.props.isLoading) {
+    if (isLoading) {
       return (
-        <div className="loading">
-          <p>Loading…</p>
+        <div className="submitting-modal">
+          <p>Loading . . .</p>
         </div>
       );
     }
 
     return (
       <div className="patient-rows-container">
-        {this.props.patients.map(patient => (
-          <PatientRow key={patient.id} data={patient} />
-        ))}
+        <h3 className="page-title">Patients</h3>
+        
+        <div className="refresh-container">
+          <button className="btn" onClick={this.handleRefresh}>Refresh</button>
+        </div>
+
+        { patients.map(
+            patient => <PatientRow key={patient.id} patient={patient} />
+          )
+        }
       </div>
     );
   }
@@ -53,12 +75,14 @@ PatientsList.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   hasErrored: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired,
+  initialFetch: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   patients: state.patients,
   hasErrored: state.patientsHasErrored,
   isLoading: state.patientsIsLoading,
+  initialFetch: state.initialFetchSucceeded,
 });
 
 const mapDispatchToProps = dispatch => ({

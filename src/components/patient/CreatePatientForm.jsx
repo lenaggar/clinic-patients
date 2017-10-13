@@ -1,48 +1,78 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const CreatePatientForm = props => {
-  const { handleSubmit } = props;
+  const {
+    handleSubmit,
+    submitSucceeded,
+    createPatientIsLoading,
+    languagesIsLoading,
+    languagesHasErrored,
+    languages
+  } = props;
 
-  return (
+  const languageOptions = (IsLoading, HasErrored, langs) => {
+    if (IsLoading) {
+      return (
+        <option value="" disabled>
+          Loading available languages . . .
+        </option>
+      )
+    }
+    if (HasErrored) {
+      return (
+        <option value="" disabled>
+          sorry, there was a problem loading the languages!!!
+        </option>
+      )
+    }
+    return langs.map(lang => (
+      <option key={lang} value={lang}>
+        {lang}
+      </option>
+    ))
+  }
+
+  const form = (
     <form onSubmit={handleSubmit}>
       <fieldset className="patient-info">
-        <label htmlFor="first-name">
+        <label htmlFor="firstName">
           First Name:
           <Field
             component="input"
             type="text"
-            name="first-name"
-            id="first-name"
+            name="firstName"
+            id="firstName"
             placeholder="Jon"
             required
           />
         </label>
-        <label htmlFor="last-name">
+        <label htmlFor="lastName">
           Last Name:
           <Field
             component="input"
             type="text"
-            name="last-name"
-            id="last-name"
+            name="lastName"
+            id="lastName"
             placeholder="Snow"
             required
           />
         </label>
-        <label htmlFor="date-of-birth">
+        <label htmlFor="dateOfBirth">
           Date of birth:
           <Field
             component="input"
             type="date"
-            name="date-of-birth"
-            id="date-of-birth"
+            name="dateOfBirth"
+            id="dateOfBirth"
             placeholder="1988-11-22"
             required
           />
         </label>
         <label htmlFor="languages">
-          List of Languages:
+          List of Languages: (you can select more than one)
           <Field
             component="select"
             name="languages"
@@ -50,15 +80,7 @@ const CreatePatientForm = props => {
             multiple
             required
           >
-            <option value="" disabled>
-              Multiple selection available
-            </option>
-            <option value="English">English</option>
-            <option value="Arabic">Arabic</option>
-            <option value="French">French</option>
-            <option value="German">German</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Latin">Latin</option>
+            { languageOptions(languagesIsLoading, languagesHasErrored, languages) }
           </Field>
         </label>
       </fieldset>
@@ -67,13 +89,38 @@ const CreatePatientForm = props => {
       </fieldset>
     </form>
   );
+
+  const submittingModal = (
+    <div className="submitting-modal">
+      <p>Submitting . . .</p>
+    </div>
+  );
+
+  return (
+    <div>
+      {/* props.submitSucceeded is a redux-form property which becomes true after the form is submitted */}
+      {submitSucceeded && !createPatientIsLoading ? (
+        <Redirect to="/patients" />
+      ) : (
+        form
+      )}
+
+      {createPatientIsLoading && submittingModal}
+    </div>
+  );
 };
 
 CreatePatientForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  createPatientIsLoading: PropTypes.bool.isRequired,
+  languagesIsLoading: PropTypes.bool.isRequired,
+  languagesHasErrored: PropTypes.bool.isRequired,
+  languages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  submitSucceeded: PropTypes.bool.isRequired,
 };
 
 export default reduxForm({
   form: "patient",
   initialValues: { languages: [] },
+  // onSubmitSuccess: (result, dispatch) => dispatch(reset("patient")),
 })(CreatePatientForm);

@@ -1,39 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const PatientRow = props => {
-
-  const {
-    data: {
-      id,
-      firstName,
-      lastName,
-      dateOfBirth,
-      languages
-    }
-  } = props;
-
-  return (
-    <div className="patient-row">
-      {/* <pre>
-        <code>{JSON.stringify(props.data, null, 4)}</code>
-      </pre> */}
-      <div className="name">
-        <h3>{`${firstName} ${lastName}`}</h3>
-      </div>
-      <div className="cta">
-        <button onClick={() => { console.log(id) }} >View</button>
-      </div>
-        {/* <p className="card-text">{Date(props.data.dateOfBirth)}</p>
-        <ul>
-          {props.data.languages.map(lang => <li key='lang'>{lang}</li>)}
-        </ul> */}
+const PatientRow = ({ patient }) => (
+  <div className="patient-row">
+    <div className="name">
+      <h3>{`${patient.lastName}, ${patient.firstName}`}</h3>
+      <p>{`ID #${patient.id}`}</p>
     </div>
-  )
-};
+    <div className="cta">
+      <Link to={`/patients/${patient.id}`} className="btn" patient={patient} >View</Link>
+    </div>
+  </div>
+);
 
 PatientRow.propTypes = {
-  data: PropTypes.objectOf(PropTypes.any).isRequired,
+  patient: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default PatientRow;

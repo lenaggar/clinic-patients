@@ -2,7 +2,8 @@ import Home from "./common/Home";
 import About from "./common/About";
 import Patients from "./patient/Patients";
 import PatientsList from "./patient/PatientsList";
+import PatientsListPage from "./patient/PatientsListPage";
 import PatientDetails from "./patient/PatientDetails";
-import CreatePatient from "./patient/CreatePatient";
+import CreatePatientPage from "./patient/CreatePatientPage";
 
-export { Home, About, Patients, PatientsList, PatientDetails, CreatePatient };
+export { Home, About, Patients, PatientsList, PatientsListPage, PatientDetails, CreatePatientPage };

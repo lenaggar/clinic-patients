@@ -11,10 +11,10 @@
     "precommit": "yarn ",
     "prepush": "yarn ",
     "build": "yarn clean && webpack",
-    "build:watch:prod": "yarn clean && webpack --watch --env.env=prod",
-    "build:watch:dev": "yarn clean && webpack --watch --env.env=dev",
+    "build:prod": "./node_modules/.bin/webpack --env.env=prod",
+    "build:dev": "./node_modules/.bin/webpack --env.env=dev",
     "clean": "rimraf dist",
-    "serve": "webpack-dev-server --hot --env.env=dev"
+    "serve": "./node_modules/.bin/webpack --watch --env.env=dev"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -25,6 +25,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.1.0",
     "redux-thunk": "^2.2.0",
     "uglifyjs-webpack-plugin": "^1.0.0-beta.2"
@@ -52,6 +53,7 @@
     "file-loader": "^1.1.5",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
+    "http-server": "^0.10.0",
     "jest": "^21.2.1",
     "prettier": "^1.7.4",
     "react-hot-loader": "^3.0.0-beta.7",

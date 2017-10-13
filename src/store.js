@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension"
 import rootReducer from "./reducers";
 
+// custom middleware
 const logger = store => next => action => {
   if (typeof action !== 'function') {
     console.log("dispatching:   ", action); // eslint-disable-line no-console
@@ -17,7 +19,9 @@ const configureStore = initialState => {
   const store = createStore(
     rootReducer,
     initialState,
-    applyMiddleware(logger, thunk)
+    composeWithDevTools(
+      applyMiddleware(logger, thunk)
+    )
   );
   return store;
 };
