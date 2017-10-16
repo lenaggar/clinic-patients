@@ -1,8 +1,8 @@
 import React from "react";
 
-const About = () => (
+const FourOhFour = () => (
   <div>
-    <h3 className="page-title">About Page</h3>
+    <h3 className="page-title">Error: 404</h3>
 
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam
@@ -13,4 +13,4 @@ const About = () => (
   </div>
 );
 
-export default About;
+export default FourOhFour;

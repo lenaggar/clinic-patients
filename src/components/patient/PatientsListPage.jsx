@@ -6,13 +6,13 @@ import PatientDetais from "./PatientDetails";
 
 const PatientsListPage = ({ match }) => (
   <div>
-    <Route path={`${match.url}/:patientId`} component={PatientDetais} />
     <Route exact path={match.url} component={PatientsList} />
+    <Route path={`${match.url}/:patientId`} component={PatientDetais} />
   </div>
 );
 
 PatientsListPage.propTypes = {
   match: PropTypes.objectOf(PropTypes.any).isRequired
-}
+};
 
 export default PatientsListPage;

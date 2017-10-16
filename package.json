@@ -13,6 +13,7 @@
     "build": "yarn clean && webpack",
     "build:prod": "./node_modules/.bin/webpack --env.env=prod",
     "build:dev": "./node_modules/.bin/webpack --env.env=dev",
+    "build:watch:dev": "./node_modules/.bin/webpack --watch --env.env=dev",
     "clean": "rimraf dist",
     "serve": "./node_modules/.bin/webpack --watch --env.env=dev"
   },
@@ -63,7 +64,5 @@
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },
-  "browserslist": [
-    "> 1%"
-  ]
+  "browserslist": ["> 1%"]
 }

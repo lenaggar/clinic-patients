@@ -1,51 +1,54 @@
 import {
+  API,
   CREATE_PATIENT_IS_LOADING,
   CREATE_PATIENT_HAS_ERRORED,
   CREATE_PATIENT_SUCCESS,
-  PATIENTS_IS_LOADING,
-  PATIENTS_HAS_ERRORED,
-  PATIENTS_FETCH_DATA_SUCCESS,
-  INITIAL_FETCH_SUCCESS,
-  LANGUAGES_FETCH_DATA_IS_LOADING,
-  LANGUAGES_FETCH_DATA_HAS_ERRORED,
-  LANGUAGES_FETCH_DATA_SUCCESS,
-  LANGUAGES_INITIAL_FETCH_SUCCESS
+  // PATIENTS_IS_LOADING,
+  // PATIENTS_HAS_ERRORED,
+  // PATIENTS_FETCH_DATA_SUCCESS,
+  // INITIAL_FETCH_SUCCESS,
+  // LANGUAGES_FETCH_DATA_IS_LOADING,
+  // LANGUAGES_FETCH_DATA_HAS_ERRORED,
+  // LANGUAGES_FETCH_DATA_SUCCESS,
+  // LANGUAGES_INITIAL_FETCH_SUCCESS,
+  FETCH_ACTION_TYPE
 } from "./actionTypes";
 
-export const initialFetchSucceeded = bool => ({
-  type: INITIAL_FETCH_SUCCESS,
-  initialFetchSucceeded: bool,
-});
+// export const initialFetchSucceeded = bool => ({
+//   type: INITIAL_FETCH_SUCCESS,
+//   initialFetchSucceeded: bool
+// });
 
-export const languagesInitialFetchSucceeded = bool => ({
-  type: LANGUAGES_INITIAL_FETCH_SUCCESS,
-  initialFetchSucceeded: bool,
-});
+// export const languagesInitialFetchSucceeded = bool => ({
+//   type: LANGUAGES_INITIAL_FETCH_SUCCESS,
+//   initialFetchSucceeded: bool
+// });
 
 export const createPatientIsLoading = bool => ({
   type: CREATE_PATIENT_IS_LOADING,
-  isLoading: bool,
+  isLoading: bool
 });
 
 export const createPatientHasErrored = bool => ({
   type: CREATE_PATIENT_HAS_ERRORED,
-  hasErrored: bool,
+  hasErrored: bool
 });
 
 export const createPatientSuccess = patient => ({
   type: CREATE_PATIENT_SUCCESS,
-  patient,
+  patient
 });
 
 export const createPatient = patient => dispatch => {
   dispatch(createPatientIsLoading(true));
 
+  // eslint-disable-next-line
   fetch("https://59de0d524c181d0012a8ce8c.mockapi.io/api/patients", {
     method: "POST",
     body: JSON.stringify(patient),
     headers: {
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   })
     .then(res => {
       if (!res.ok) {
@@ -64,74 +67,105 @@ export const createPatient = patient => dispatch => {
     .catch(() => dispatch(createPatientHasErrored(true)));
 };
 
-export const patientsIsLoading = bool => ({
-  type: PATIENTS_IS_LOADING,
-  isLoading: bool,
+// export const patientsIsLoading = bool => ({
+//   type: PATIENTS_IS_LOADING,
+//   isLoading: bool
+// });
+
+// export const patientsHasErrored = bool => ({
+//   type: PATIENTS_HAS_ERRORED,
+//   hasErrored: bool
+// });
+
+// export const patientsFetchDataSuccess = patients => ({
+//   type: PATIENTS_FETCH_DATA_SUCCESS,
+//   patients
+// });
+
+// export const patientsFetchData = () => dispatch => {
+//   dispatch(patientsIsLoading(true));
+
+//   setTimeout(() => {
+//     // eslint-disable-next-line
+//     fetch("https://59de0d524c181d0012a8ce8c.mockapi.io/api/patients")
+//       .then(res => {
+//         if (!res.ok) {
+//           throw Error(res.statusText);
+//         }
+
+//         dispatch(patientsIsLoading(false));
+
+//         return res.json();
+//       })
+//       .then(patients => {
+//         dispatch(initialFetchSucceeded(true));
+//         dispatch(patientsFetchDataSuccess(patients));
+//       })
+//       .catch(() => dispatch(patientsHasErrored(true)));
+//   }, 1000);
+// };
+
+// export const languagesIsLoading = bool => ({
+//   type: LANGUAGES_FETCH_DATA_IS_LOADING,
+//   isLoading: bool
+// });
+
+// export const languagesHasErrored = bool => ({
+//   type: LANGUAGES_FETCH_DATA_HAS_ERRORED,
+//   hasErrored: bool
+// });
+
+// export const languagesFetchDataSuccess = languages => ({
+//   type: LANGUAGES_FETCH_DATA_SUCCESS,
+//   languages
+// });
+
+// export const languagesFetchData = () => dispatch => {
+//   languagesIsLoading(true);
+
+//   setTimeout(() => {
+//     // eslint-disable-next-line
+//     fetch("https://59de0d524c181d0012a8ce8c.mockapi.io/api/availableLanguages")
+//       .then(res => {
+//         if (!res.ok) {
+//           throw Error(res.statusText);
+//         }
+
+//         dispatch(languagesIsLoading(false));
+//         return res.json();
+//       })
+//       .then(objects => objects.map(obj => obj.language))
+//       .then(languages => {
+//         dispatch(languagesInitialFetchSucceeded(true));
+//         dispatch(languagesFetchDataSuccess(languages));
+//       })
+//       .catch(() => dispatch(languagesHasErrored(true)));
+//   }, 2000);
+// };
+
+export const fetchPaients = () => ({
+  type: API,
+  payload: Object.assign(
+    { url: "patients" },
+    FETCH_ACTION_TYPE("FETCH_PATIENTS")
+  )
 });
 
-export const patientsHasErrored = bool => ({
-  type: PATIENTS_HAS_ERRORED,
-  hasErrored: bool,
+export const fetchLanguages = () => ({
+  type: API,
+  payload: Object.assign(
+    { url: "availableLanguages" },
+    FETCH_ACTION_TYPE("FETCH_LANGUAGES")
+  )
 });
 
-export const patientsFetchDataSuccess = patients => ({
-  type: PATIENTS_FETCH_DATA_SUCCESS,
-  patients,
-});
-
-export const patientsFetchData = () => dispatch => {
-  dispatch(patientsIsLoading(true));
-
-  fetch("https://59de0d524c181d0012a8ce8c.mockapi.io/api/patients")
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-
-      dispatch(patientsIsLoading(false));
-
-      return res.json();
-    })
-    .then(patients => {
-      dispatch(initialFetchSucceeded(true));
-      dispatch(patientsFetchDataSuccess(patients));
-    })
-    .catch(() => dispatch(patientsHasErrored(true)));
-};
-
-export const languagesIsLoading = bool => ({
-  type: LANGUAGES_FETCH_DATA_IS_LOADING,
-  isLoading: bool,
-});
-
-export const languagesHasErrored = bool => ({
-  type: LANGUAGES_FETCH_DATA_HAS_ERRORED,
-  hasErrored: bool,
-});
-
-export const languagesFetchDataSuccess = languages => ({
-  type: LANGUAGES_FETCH_DATA_SUCCESS,
-  languages,
-});
-
-export const languagesFetchData = () => dispatch => {
-  languagesIsLoading(true);
-
-  fetch("https://59de0d524c181d0012a8ce8c.mockapi.io/api/availableLanguages")
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-
-      setTimeout(() => {
-        dispatch(languagesIsLoading(false));
-      }, 2000);
-      return res.json();
-    })
-    .then(objects => objects.map(obj => obj.language))
-    .then(languages => {
-      dispatch(languagesInitialFetchSucceeded(true));
-      dispatch(languagesFetchDataSuccess(languages));
-    })
-    .catch(() => dispatch(languagesHasErrored(true)));
-};
+// export const fetchPaients = () => ({
+//   type: API,
+//   payload: {
+//     url: "patients",
+//     success: "FETCH_PATIENTS_SUCCESS",
+//     error: "FETCH_PATIENTS_ERROR",
+//     apiStart: "FETCH_PATIENTS_API_START",
+//     apiDone: "FETCH_PATIENTS_API_DONE"
+//   }
+// });

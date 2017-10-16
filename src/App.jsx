@@ -5,10 +5,6 @@ import routes from "./routes";
 
 const store = configureStore();
 
-const App = () => (
-  <Provider store={store}>
-    {routes}
-  </Provider>
-);
+const App = () => <Provider store={store}>{routes}</Provider>;
 
 export default App;

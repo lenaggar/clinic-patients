@@ -11,9 +11,12 @@ class CreatePatientPage extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.languagesInitialFetchSucceeded && !this.props.languagesIsLoading) {
+    if (
+      !this.props.languagesInitialFetchSucceeded &&
+      !this.props.languagesIsLoading
+    ) {
       this.props.fetchLanguages();
-    };
+    }
   }
 
   submitPatient(input) {
@@ -43,7 +46,7 @@ CreatePatientPage.propTypes = {
   languagesIsLoading: PropTypes.bool.isRequired,
   languagesHasErrored: PropTypes.bool.isRequired,
   languages: PropTypes.arrayOf(PropTypes.string).isRequired,
-  languagesInitialFetchSucceeded: PropTypes.bool.isRequired,
+  languagesInitialFetchSucceeded: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -57,7 +60,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   createPatient: patient => dispatch(patientActions.createPatient(patient)),
-  fetchLanguages: () => dispatch(patientActions.languagesFetchData())
+  // fetchLanguages: () => dispatch(patientActions.languagesFetchData())
+  fetchLanguages: () => dispatch(patientActions.fetchLanguages())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePatientPage);

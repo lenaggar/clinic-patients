@@ -19,21 +19,21 @@ const CreatePatientForm = props => {
         <option value="" disabled>
           Loading available languages . . .
         </option>
-      )
+      );
     }
     if (HasErrored) {
       return (
         <option value="" disabled>
           sorry, there was a problem loading the languages!!!
         </option>
-      )
+      );
     }
-    return langs.map(lang => (
-      <option key={lang} value={lang}>
-        {lang}
+    return langs.map(obj => (
+      <option key={obj.id} value={obj.lang}>
+        {obj.lang}
       </option>
-    ))
-  }
+    ));
+  };
 
   const form = (
     <form onSubmit={handleSubmit}>
@@ -80,7 +80,11 @@ const CreatePatientForm = props => {
             multiple
             required
           >
-            { languageOptions(languagesIsLoading, languagesHasErrored, languages) }
+            {languageOptions(
+              languagesIsLoading,
+              languagesHasErrored,
+              languages
+            )}
           </Field>
         </label>
       </fieldset>
@@ -115,12 +119,12 @@ CreatePatientForm.propTypes = {
   createPatientIsLoading: PropTypes.bool.isRequired,
   languagesIsLoading: PropTypes.bool.isRequired,
   languagesHasErrored: PropTypes.bool.isRequired,
-  languages: PropTypes.arrayOf(PropTypes.string).isRequired,
-  submitSucceeded: PropTypes.bool.isRequired,
+  languages: PropTypes.arrayOf(PropTypes.object).isRequired,
+  submitSucceeded: PropTypes.bool.isRequired
 };
 
 export default reduxForm({
   form: "patient",
-  initialValues: { languages: [] },
+  initialValues: { languages: [] }
   // onSubmitSuccess: (result, dispatch) => dispatch(reset("patient")),
 })(CreatePatientForm);

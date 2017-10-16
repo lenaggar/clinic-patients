@@ -1,0 +1,15 @@
+{
+  "workbench.iconTheme": "vscode-icons",
+  "window.zoomLevel": 0,
+  "workbench.startupEditor": "newUntitledFile",
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "window.menuBarVisibility": "toggle",
+  "workbench.colorTheme": "One Monokai",
+  "editor.fontFamily": "Fira Code",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.tabCompletion": true
+}

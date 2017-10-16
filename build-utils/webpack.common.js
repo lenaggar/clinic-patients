@@ -9,55 +9,55 @@ const VENDOR_LIBS = [
   "react-redux",
   "redux",
   "redux-thunk",
-  "redux-form",
+  "redux-form"
 ];
 
 const config = {
   context: commonPaths.rootPath,
   entry: {
     bundle: commonPaths.entryFilePath,
-    vendor: VENDOR_LIBS,
+    vendor: VENDOR_LIBS
   },
   output: {
     filename: "[name].[hash].js",
-    path: commonPaths.outputPath,
+    path: commonPaths.outputPath
   },
   resolve: {
-    extensions: [".js", ".jsx", ".json"],
+    extensions: [".js", ".jsx", ".json"]
   },
   stats: {
     colors: true,
     reasons: true,
-    chunks: true,
+    chunks: true
   },
   module: {
     rules: [
       {
         use: "babel-loader",
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         use: ["style-loader", "css-loader"],
-        test: /\.css$/,
+        test: /\.css$/
       },
       {
         test: /\.(woff2?|ttf|eot|svg)$/,
-        loader: 'url-loader?limit=10000'
-      },
-    ],
+        loader: "url-loader?limit=10000"
+      }
+    ]
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      names: ["vendor", "manifest"],
+      names: ["vendor", "manifest"]
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
       template: "./index.html",
-      inject: "body",
-    }),
-  ],
+      inject: "body"
+    })
+  ]
 };
 
 module.exports = config;

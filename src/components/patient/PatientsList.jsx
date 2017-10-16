@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { patientsFetchData } from "./../../actions/patientActions";
+import { fetchPaients } from "./../../actions/patientActions";
 import PatientRow from "./PatientRow";
 
 class PatientsList extends React.Component {
@@ -14,16 +14,16 @@ class PatientsList extends React.Component {
   componentDidMount() {
     if (!this.props.initialFetch && !this.props.isLoading) {
       this.props.fetchData();
-    };
+    }
   }
 
   shouldComponentUpdate(nextProps) {
     if (this.props.isLoading && !nextProps.isLoading) {
       return false;
-    };
+    }
     return true;
   }
- 
+
   handleRefresh() {
     if (!this.props.isLoading) {
       this.props.fetchData();
@@ -31,11 +31,7 @@ class PatientsList extends React.Component {
   }
 
   render() {
-    const {
-      hasErrored,
-      isLoading,
-      patients
-    } = this.props;
+    const { hasErrored, isLoading, patients } = this.props;
 
     if (hasErrored) {
       return (
@@ -56,15 +52,16 @@ class PatientsList extends React.Component {
     return (
       <div className="patient-rows-container">
         <h3 className="page-title">Patients</h3>
-        
+
         <div className="refresh-container">
-          <button className="btn" onClick={this.handleRefresh}>Refresh</button>
+          <button className="btn" onClick={this.handleRefresh}>
+            Refresh
+          </button>
         </div>
 
-        { patients.map(
-            patient => <PatientRow key={patient.id} patient={patient} />
-          )
-        }
+        {patients.map(patient => (
+          <PatientRow key={patient.id} patient={patient} />
+        ))}
       </div>
     );
   }
@@ -75,18 +72,19 @@ PatientsList.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   hasErrored: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired,
-  initialFetch: PropTypes.bool.isRequired,
+  initialFetch: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   patients: state.patients,
   hasErrored: state.patientsHasErrored,
   isLoading: state.patientsIsLoading,
-  initialFetch: state.initialFetchSucceeded,
+  initialFetch: state.initialFetchSucceeded
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchData: () => dispatch(patientsFetchData()),
+  // fetchData: () => dispatch(patientsFetchData()),
+  fetchData: () => dispatch(fetchPaients())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PatientsList);
