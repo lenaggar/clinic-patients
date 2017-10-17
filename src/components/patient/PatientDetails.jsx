@@ -8,7 +8,7 @@ const PatientDetails = ({ patients, match }) => {
 
   return (
     <div>
-      <Link to="/patients">{"<- go back"}</Link>
+      <Link to="/patients">go back</Link>
       <div className="patient-details-container">
         <h3 className="page-title">{`Patient #${match.params.patientId}`}</h3>
         {/* <pre><code>{JSON.stringify(patient, null, 4)}</code></pre> */}
@@ -33,7 +33,7 @@ PatientDetails.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  patients: state.patients
+  patients: state.db.patients
 });
 
 export default connect(mapStateToProps)(PatientDetails);

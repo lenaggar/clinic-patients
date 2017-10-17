@@ -45,17 +45,17 @@ CreatePatientPage.propTypes = {
   createPatientIsLoading: PropTypes.bool.isRequired,
   languagesIsLoading: PropTypes.bool.isRequired,
   languagesHasErrored: PropTypes.bool.isRequired,
-  languages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  languages: PropTypes.arrayOf(PropTypes.object).isRequired,
   languagesInitialFetchSucceeded: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-  createPatientIsLoading: state.createPatientIsLoading,
-  createPatientHasErrored: state.createPatientHasErrored,
-  languagesIsLoading: state.languagesIsLoading,
-  languagesHasErrored: state.languagesHasErrored,
-  languages: state.languages,
-  languagesInitialFetchSucceeded: state.languagesInitialFetchSucceeded
+  createPatientIsLoading: state.ui.createPatientIsLoading,
+  createPatientHasErrored: state.ui.createPatientHasErrored,
+  languagesIsLoading: state.ui.languagesIsLoading,
+  languagesHasErrored: state.ui.languagesHasErrored,
+  languages: state.db.languages,
+  languagesInitialFetchSucceeded: state.ui.languagesInitialFetchSucceeded
 });
 
 const mapDispatchToProps = dispatch => ({

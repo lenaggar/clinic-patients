@@ -10,7 +10,30 @@ const apiMiddleware = ({ dispatch }) => next => action => {
 
   dispatch({ type: payload.apiStart });
 
-  fetch(BASE_URL + payload.url) // eslint-disable-line
+  let options;
+
+  switch (payload.method) {
+    case "GET":
+      options = {
+        method: payload.method
+      };
+      break;
+
+    case "POST":
+      options = {
+        method: payload.method,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload.data)
+      };
+      break;
+
+    default:
+      break;
+  }
+
+  fetch(BASE_URL + payload.url, options) // eslint-disable-line
     .then(res => {
       if (!res.ok) {
         throw Error(res.statusText);

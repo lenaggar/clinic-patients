@@ -2,7 +2,8 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["compat", "prettier"],
   "rules": {
-    "compat/compat": 2
+    "compat/compat": 2,
+    "comma-dangle": ["error", "never"]
   },
   "parserOptions": {
     "ecmaVersion": 2016,

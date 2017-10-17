@@ -29,8 +29,8 @@ const CreatePatientForm = props => {
       );
     }
     return langs.map(obj => (
-      <option key={obj.id} value={obj.lang}>
-        {obj.lang}
+      <option key={obj.id} value={obj.language}>
+        {obj.language}
       </option>
     ));
   };

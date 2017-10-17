@@ -76,14 +76,13 @@ PatientsList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  patients: state.patients,
-  hasErrored: state.patientsHasErrored,
-  isLoading: state.patientsIsLoading,
-  initialFetch: state.initialFetchSucceeded
+  patients: state.db.patients,
+  hasErrored: state.ui.patientsHasErrored,
+  isLoading: state.ui.patientsIsLoading,
+  initialFetch: state.ui.initialFetchSucceeded
 });
 
 const mapDispatchToProps = dispatch => ({
-  // fetchData: () => dispatch(patientsFetchData()),
   fetchData: () => dispatch(fetchPaients())
 });
 

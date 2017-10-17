@@ -1,28 +1,32 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import {
+  patients,
+  languages,
   createPatientIsLoading,
   createPatientHasErrored,
-  patientsHasErrored,
   patientsIsLoading,
-  patients,
-  initialFetchSucceeded,
+  patientsHasErrored,
   languagesIsLoading,
   languagesHasErrored,
-  languages,
-  languagesInitialFetchSucceeded,
+  initialFetchSucceeded,
+  languagesInitialFetchSucceeded
 } from "./patientReducers";
 
 export default combineReducers({
-  createPatientIsLoading,
-  createPatientHasErrored,
-  patientsHasErrored,
-  patientsIsLoading,
-  patients,
-  initialFetchSucceeded,
-  languagesIsLoading,
-  languagesHasErrored,
-  languages,
-  languagesInitialFetchSucceeded,
-  form: formReducer,
+  db: combineReducers({
+    patients,
+    languages
+  }),
+  ui: combineReducers({
+    createPatientIsLoading,
+    createPatientHasErrored,
+    patientsIsLoading,
+    patientsHasErrored,
+    languagesIsLoading,
+    languagesHasErrored,
+    initialFetchSucceeded,
+    languagesInitialFetchSucceeded
+  }),
+  form: formReducer
 });
