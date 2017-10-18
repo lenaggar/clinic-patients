@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const header = (
-  <div>
-    <h1 className="page-title">Clinic Alpha Patients Manager</h1>
+  <div className="header">
     <ul>
       <li>
         <Link to="/">Home</Link>
