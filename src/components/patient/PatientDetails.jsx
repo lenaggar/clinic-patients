@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const PatientDetails = ({ patients, match }) => {
   const patient = patients.find(p => p.id === match.params.patientId);
@@ -10,6 +11,10 @@ const PatientDetails = ({ patients, match }) => {
 
   return (
     <div>
+      <Helmet>
+        <title>Alpha: {`${patient.firstName} ${patient.lastName}`}</title>
+      </Helmet>
+
       <Link to="/patients">go back</Link>
       <div className="patient-details-container">
         <h3 className="page-title">{`Patient #${match.params.patientId}`}</h3>

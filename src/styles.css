@@ -69,6 +69,11 @@ select {
   min-height: 100px;
 }
 
+.sub-text {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
 .patient-info {
   padding: 20px 20px 0 20px;
 }

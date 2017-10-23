@@ -61,10 +61,13 @@ const CreatePatientForm = props => {
           />
         </label>
         <label htmlFor="dateOfBirth">
-          Date of birth:
+          Date of birth:{" "}
+          <span className="sub-text">(must be at least 18 years old)</span>
           <Field
             component="input"
             type="date"
+            min="1950-01-01"
+            max="1999-12-31"
             name="dateOfBirth"
             id="dateOfBirth"
             placeholder="1988-11-22"
@@ -72,7 +75,8 @@ const CreatePatientForm = props => {
           />
         </label>
         <label htmlFor="languages">
-          List of Languages: (you can select more than one)
+          List of Languages:{" "}
+          <span className="sub-text">(select all that apply)</span>
           <Field
             component="select"
             name="languages"

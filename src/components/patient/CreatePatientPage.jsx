@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
 import * as patientActions from "./../../actions/patientActions";
 import CreatePatientForm from "./CreatePatientForm";
 
@@ -26,6 +27,10 @@ class CreatePatientPage extends React.Component {
   render() {
     return (
       <div>
+        <Helmet>
+          <title>Alph | Create New Patient</title>
+        </Helmet>
+
         <h3 className="page-title">Create a new patient record</h3>
         <CreatePatientForm
           onSubmit={this.submitPatient}
