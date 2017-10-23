@@ -1,11 +1,11 @@
-import { API, FETCH_ACTION_TYPE } from "./actionTypes";
+import { API, ASYNC_ACTION_TYPE } from "./actionTypes";
 
 export const fetchPaients = () => ({
   type: API,
   payload: Object.assign(
     { url: "patients" },
     { method: "GET" },
-    FETCH_ACTION_TYPE("FETCH_PATIENTS")
+    ASYNC_ACTION_TYPE("FETCH_PATIENTS")
   )
 });
 
@@ -14,7 +14,7 @@ export const fetchLanguages = () => ({
   payload: Object.assign(
     { url: "availableLanguages" },
     { method: "GET" },
-    FETCH_ACTION_TYPE("FETCH_LANGUAGES")
+    ASYNC_ACTION_TYPE("FETCH_LANGUAGES")
   )
 });
 
@@ -24,6 +24,6 @@ export const createPatient = patient => ({
     { url: "patients" },
     { method: "POST" },
     { data: patient },
-    FETCH_ACTION_TYPE("CREATE_PATIENT")
+    ASYNC_ACTION_TYPE("CREATE_PATIENT")
   )
 });

@@ -51,7 +51,6 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ["vendor", "manifest"]
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
       template: "./index.html",

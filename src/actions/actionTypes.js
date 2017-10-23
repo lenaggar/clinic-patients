@@ -1,6 +1,6 @@
 export const API = "API";
 
-export const FETCH_ACTION_TYPE = type => ({
+export const ASYNC_ACTION_TYPE = type => ({
   success: `${type}_SUCCESS`,
   error: `${type}_ERROR`,
   apiStart: `${type}_API_START`,
