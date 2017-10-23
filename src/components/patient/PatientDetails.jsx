@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 const PatientDetails = ({ patients, match }) => {
   const patient = patients.find(p => p.id === match.params.patientId);
 
+  const date = new Date(patient.dateOfBirth);
+
   return (
     <div>
       <Link to="/patients">go back</Link>
@@ -17,8 +19,10 @@ const PatientDetails = ({ patients, match }) => {
           <p>{patient.firstName}</p>
           <h4 className="patient-name">Last Name:</h4>
           <p>{patient.lastName}</p>
-          <h4 className="patient-date-of-birth">Dae of birth:</h4>
-          <p>{patient.dateOfBirth}</p>
+          <h4 className="patient-date-of-birth">Date of birth:</h4>
+          <p>
+            {`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`}
+          </p>
           <h4 className="patient-languages">Used Languages:</h4>
           <ul>{patient.languages.map(lang => <li key={lang}>{lang}</li>)}</ul>
         </div>

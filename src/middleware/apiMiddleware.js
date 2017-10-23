@@ -13,13 +13,8 @@ const apiMiddleware = ({ dispatch }) => next => action => {
   let options;
 
   switch (payload.method) {
-    case "GET":
-      options = {
-        method: payload.method
-      };
-      break;
-
     case "POST":
+    case "PUT":
       options = {
         method: payload.method,
         headers: {
@@ -30,6 +25,9 @@ const apiMiddleware = ({ dispatch }) => next => action => {
       break;
 
     default:
+      options = {
+        method: payload.method
+      };
       break;
   }
 
